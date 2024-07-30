@@ -60,3 +60,17 @@ body{
 .restBtn:active{
     transform:scale(0.9);
 }
+.promptMsg{
+    display: block;
+    /* flex-direction: column; */
+    font-size: 3vmin;
+    margin: 8px auto;
+    height:6vmin;
+    width: 30vmin;
+    /* max-width: max-content; */
+    /* padding: 0 10px; */
+    border-radius: 30px;
+    border: none;
+    box-shadow: 1px 1px 2pt e1aa7d;
+    color:black;
+}

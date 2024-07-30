@@ -1,5 +1,6 @@
 let box = document.querySelectorAll(".box");
 let restBtn=document.querySelector(".restBtn")
+let promptBtn=document.querySelector(".promptMsg");
 
 const win_stat=[
     [0,1,2],
@@ -21,6 +22,8 @@ let restFtn=()=>
         box[j].disabled=false;
         turn="X";
         }
+        promptBtn.style.backgroundColor="aliceblue";
+        promptBtn.style.color="#e1aa7d";
     };
 
 let wincheck=()=>
@@ -32,33 +35,41 @@ let wincheck=()=>
         let pos3Val=box[pattern[2]].innerText;
         if(pos1Val!="" && pos2Val!="" && pos3Val!="")
             {
-            if(pos1Val==pos2Val && pos2Val==pos3Val)
-                {
-                alert(`${pos1Val} Win`);
-                restFtn();
+                if(pos1Val==pos2Val && pos2Val==pos3Val)
+                    {
+                        promptBtn.textContent=(`${pos1Val} Win`);
+                        promptBtn.style.backgroundColor="red";
+                        promptBtn.style.color="white";
+                        for(let j=0;j<box.length;j++)
+                            {
+                            box[j].disabled=true;
+                            }
+                        // restFtn();
+                    }
                 }
             }
-        }
-    };
-
-box.forEach((boxes)=>
-    {
-    boxes.addEventListener("click",()=>
-        {
-        if(turn=="X")
+        };
+        
+        box.forEach((boxes)=>
             {
-            boxes.textContent=turn;
-            turn="Z";
+                boxes.addEventListener("click",()=>
+                    {
+                        if(turn=="X")
+                            {
+                                boxes.textContent=turn;
+                                turn="Z";
+                                promptBtn.textContent=(`${turn} turn`);
+                            }
+                            else
+                            {
+                                boxes.textContent=turn;
+                                turn="X";
+                                promptBtn.textContent=(`${turn} turn`);
+                            }
+                boxes.disabled= true;
+                restBtn.addEventListener("click",restFtn);
+                wincheck();
+                    }
+                                    )   
             }
-            else
-            {
-            boxes.textContent=turn;
-            turn="X";
-            }
-        boxes.disabled= true;
-        restBtn.addEventListener("click",restFtn);
-        wincheck();
-        }
-                        )
-    }
-        )
+                    )
